@@ -53,3 +53,7 @@ dkms.conf
 
 # Jetbrain
 .idea/
+
+# Test files
+test.c
+win-test.cmd
