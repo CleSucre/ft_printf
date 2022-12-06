@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_base_fd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jthomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/06 23:46:38 by jthomas           #+#    #+#             */
-/*   Updated: 2022/12/06 23:48:46 by jthomas          ###   ########.fr       */
+/*   Created: 2022/12/06 23:54:58 by jthomas           #+#    #+#             */
+/*   Updated: 2022/12/06 23:55:07 by jthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libftprintf.h"
 
-int	ft_printf(const char *format, ...)
+void	ft_putnbr_base_fd(int nbr, char *base, int fd)
 {
-	int		i;
-	int		count;
-	va_list	args;
+	long	i;
+	int		size;
 
-	i = 0;
-	count = 0;
-	va_start(args, format);
-	while (format[i])
+	size = ft_strlen(base);
+	i = nbr;
+	if (i < 0)
 	{
-		if (format[i] != '%')
-			write(1, &format[i++], 1);
-		else if (ft_isflag(format[++i]))
-		{
-			ft_printflag(format[i++], &args);
-			count++;
-		}
+		ft_putchar_fd('-', fd);
+		i *= -1;
 	}
-	va_end(args);
-	return (count);
+	if (i < size)
+		ft_putchar_fd(base[i], fd);
+	else
+	{
+		ft_putnbr_base_fd(i / size, base, fd);
+		ft_putnbr_base_fd(i % size, base, fd);
+	}
 }
