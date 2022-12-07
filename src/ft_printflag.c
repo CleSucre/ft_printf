@@ -6,11 +6,11 @@
 /*   By: jthomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 23:46:52 by jthomas           #+#    #+#             */
-/*   Updated: 2022/12/06 23:49:46 by jthomas          ###   ########.fr       */
+/*   Updated: 2022/12/07 17:20:33 by jthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "../includes/libftprintf.h"
 
 //shoud alaways be called after ft_isflag
 void	ft_printflag(char c, va_list *args)

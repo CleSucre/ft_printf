@@ -6,11 +6,11 @@
 /*   By: jthomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 23:55:45 by jthomas           #+#    #+#             */
-/*   Updated: 2022/12/06 23:55:54 by jthomas          ###   ########.fr       */
+/*   Updated: 2022/12/07 17:20:45 by jthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "../includes/libftprintf.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {

@@ -6,11 +6,11 @@
 #    By: jthomas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:21:01 by jthomas           #+#    #+#              #
-#    Updated: 2022/12/06 23:43:19 by jthomas          ###   ########.fr        #
+#    Updated: 2022/12/07 17:37:38 by jthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ifeq ($(OS),Windows_NT)
+ifeq ($(OS), Windows_NT)
 	DIRSEP	= \\
 	RM		= del
 else
@@ -26,23 +26,29 @@ OBJS		= ${SRCS:.c=.o}
 
 CC			= gcc
 
-CFLAGS		= -c -Wall -Wextra -Werror
+HEAD		= includes
 
-LIBFT 		= ar -crs ${NAME} ${OBJS}
+CFLAGS		= -c -Wall -Wextra -Werror -I ${HEAD}
 
-${NAME}: ${OBJS}
-	${CC} ${CFLAGS} ${SRCS}
+LIBFT 		= ar -crs ${NAME} ${OBJS} libft/src/*.o
+
+${NAME}: libft.a ${OBJS}
 	${LIBFT}
+
+libft.a:
+	${MAKE} -C .${DIRSEP}libft all
 
 all: ${NAME}
 
 clean:
 	${RM} ${OBJS}
+	${MAKE} -C .${DIRSEP}libft clean
 
 fclean:
 	${RM} ${OBJS}
 	${RM} ${NAME}
+	${MAKE} -C .${DIRSEP}libft fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libft.a

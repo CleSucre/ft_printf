@@ -6,11 +6,11 @@
 /*   By: jthomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 23:46:27 by jthomas           #+#    #+#             */
-/*   Updated: 2022/12/06 23:47:33 by jthomas          ###   ########.fr       */
+/*   Updated: 2022/12/07 17:20:24 by jthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "../includes/libftprintf.h"
 
 int	ft_isflag(char c)
 {

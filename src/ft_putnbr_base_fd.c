@@ -6,11 +6,11 @@
 /*   By: jthomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 23:54:58 by jthomas           #+#    #+#             */
-/*   Updated: 2022/12/06 23:55:07 by jthomas          ###   ########.fr       */
+/*   Updated: 2022/12/07 17:20:41 by jthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "../includes/libftprintf.h"
 
 void	ft_putnbr_base_fd(int nbr, char *base, int fd)
 {
