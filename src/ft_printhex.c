@@ -1,40 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printhex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jthomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/06 23:46:38 by jthomas           #+#    #+#             */
-/*   Updated: 2022/12/08 01:31:13 by jthomas          ###   ########.fr       */
+/*   Created: 2022/12/08 01:18:15 by jthomas           #+#    #+#             */
+/*   Updated: 2022/12/08 02:39:51 by jthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libftprintf.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_printhex(int n, char format)
 {
-	int		i;
-	int		count;
-	va_list	args;
+	int	res;
 
-	if (!format)
-		return (0);
-	i = 0;
-	count = 0;
-	va_start(args, format);
-	while (format[i])
+	if (!n)
+		return (write(1, "0", 1));
+	res = 1;
+	if (n >= 16)
 	{
-		if (format[i] != '%')
+		res += ft_printhex(n / 16, format);
+		res += ft_printhex(n % 16, format);
+		res--;
+	}
+	else
+	{
+		if (n <= 9)
+			ft_putchar_fd((n + '0'), 1);
+		else
 		{
-			ft_putchar_fd(format[i++], 1);
-			count++;
-		}
-		else if (ft_isflag(format[++i]))
-		{
-			count += ft_printflag(format[i++], args);
+			if (format == 'x')
+				ft_putchar_fd((n - 10 + 'a'), 1);
+			if (format == 'X')
+				ft_putchar_fd((n - 10 + 'A'), 1);
 		}
 	}
-	va_end(args);
-	return (count);
+	return (res);
 }

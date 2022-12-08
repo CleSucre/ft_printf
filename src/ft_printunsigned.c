@@ -1,40 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printunsigned.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jthomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/06 23:46:38 by jthomas           #+#    #+#             */
-/*   Updated: 2022/12/08 01:31:13 by jthomas          ###   ########.fr       */
+/*   Created: 2022/12/08 02:09:50 by jthomas           #+#    #+#             */
+/*   Updated: 2022/12/08 02:29:22 by jthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libftprintf.h"
 
-int	ft_printf(const char *format, ...)
+char	*ft_uitoa(unsigned int n)
 {
+	char	*res;
 	int		i;
-	int		count;
-	va_list	args;
 
-	if (!format)
+	i = ft_nbrlen(n);
+	res = (char *)malloc(sizeof(char) * (i + 1));
+	if (!res)
 		return (0);
-	i = 0;
-	count = 0;
-	va_start(args, format);
-	while (format[i])
+	res[i] = '\0';
+	while (i)
 	{
-		if (format[i] != '%')
-		{
-			ft_putchar_fd(format[i++], 1);
-			count++;
-		}
-		else if (ft_isflag(format[++i]))
-		{
-			count += ft_printflag(format[i++], args);
-		}
+		res[i - 1] = n % 10 + 48;
+		n = n / 10;
+		i--;
 	}
-	va_end(args);
-	return (count);
+	return (res);
+}
+
+int	ft_printunsigned(unsigned int n)
+{
+	int		res;
+	char	*temp;
+
+	res = 0;
+	if (n == 0)
+		res += write(1, "0", 1);
+	else
+	{
+		temp = ft_uitoa(n);
+		res += ft_printstr(temp);
+		free(temp);
+	}
+	return (res);
 }

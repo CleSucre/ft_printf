@@ -6,31 +6,28 @@
 /*   By: jthomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 23:46:52 by jthomas           #+#    #+#             */
-/*   Updated: 2022/12/07 17:20:33 by jthomas          ###   ########.fr       */
+/*   Updated: 2022/12/08 02:43:19 by jthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libftprintf.h"
 
 //shoud alaways be called after ft_isflag
-void	ft_printflag(char c, va_list *args)
+int	ft_printflag(char c, va_list args)
 {
 	if (c == 'c')
-		ft_putchar_fd(va_arg(*args, int), 1);
+		ft_putchar_fd(va_arg(args, int), 1);
 	else if (c == 's')
-		ft_putstr_fd(va_arg(*args, char *), 1);
+		return (ft_printstr(va_arg(args, char *)));
 	else if (c == 'p')
-		ft_putnbr_base_fd(va_arg(*args, unsigned long), "0123456789abcdef", 1);
-	else if (c == 'd')
-		ft_putnbr_fd(va_arg(*args, int), 1);
-	else if (c == 'i')
-		ft_putnbr_fd(va_arg(*args, int), 1);
+		return (ft_printptr(va_arg(args, unsigned long long)));
+	else if (c == 'd' || c == 'i')
+		return (ft_printnbr(va_arg(args, int)));
 	else if (c == 'u')
-		ft_putnbr_fd(va_arg(*args, int), 1);
-	else if (c == 'x')
-		ft_putnbr_fd(va_arg(*args, int), 1);
-	else if (c == 'X')
-		ft_putnbr_fd(va_arg(*args, int), 1);
+		return (ft_printunsigned(va_arg(args, int)));
+	else if (c == 'x' || c == 'X')
+		return (ft_printhex(va_arg(args, unsigned int), c));
 	else if (c == '%')
-		ft_putnbr_fd(va_arg(*args, int), 1);
+		ft_putchar_fd(c, 1);
+	return (1);
 }

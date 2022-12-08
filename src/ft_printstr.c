@@ -1,40 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jthomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/06 23:46:38 by jthomas           #+#    #+#             */
-/*   Updated: 2022/12/08 01:31:13 by jthomas          ###   ########.fr       */
+/*   Created: 2022/12/08 00:56:21 by jthomas           #+#    #+#             */
+/*   Updated: 2022/12/08 01:38:50 by jthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libftprintf.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_printstr(char *s)
 {
-	int		i;
-	int		count;
-	va_list	args;
-
-	if (!format)
-		return (0);
-	i = 0;
-	count = 0;
-	va_start(args, format);
-	while (format[i])
+	if (!s)
 	{
-		if (format[i] != '%')
-		{
-			ft_putchar_fd(format[i++], 1);
-			count++;
-		}
-		else if (ft_isflag(format[++i]))
-		{
-			count += ft_printflag(format[i++], args);
-		}
+		ft_putstr_fd("(null)", 1);
+		return (6);
 	}
-	va_end(args);
-	return (count);
+	ft_putstr_fd(s, 1);
+	return (ft_strlen(s));
 }
