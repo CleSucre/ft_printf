@@ -12,10 +12,12 @@
 
 ifeq ($(OS), Windows_NT)
 	DIRSEP	= \\
-	RM		= del
+	RM		= del -f
+	MOVE	= move
 else
 	DIRSEP	= /
 	RM		= rm -f
+	MOVE	= mv
 endif
 
 NAME = libftprintf.a
@@ -42,22 +44,23 @@ CFLAGS 	= -Wall -Wextra -Werror
 
 all: $(NAME)
 
-libft:
-	make -C libft
+libft.a:
+	make -C .${DIRSEP}libft
 
-$(NAME): libft $(OBJS)
-	ar rcs ${NAME} ${OBJS} libft/libft.a
+$(NAME): libft.a $(OBJS)
+	${MOVE} libft${DIRSEP}libft.a ${NAME}
+	ar rcs ${NAME} ${OBJS}
 
 %.o: %.c
 	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
-	make -C libft clean
-	${RM} -f ${OBJS}
+	make -C .${DIRSEP}libft clean
+	${RM} ${OBJS}
 
 fclean: clean
-	make -C libft fclean
-	${RM} -f ${NAME}
+	make -C .${DIRSEP}libft fclean
+	${RM} ${NAME}
 
 re: fclean all
 
