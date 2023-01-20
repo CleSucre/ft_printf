@@ -18,9 +18,7 @@
 # include <stdarg.h>
 
 int		ft_printf(const char *format, ...);
-int		ft_isflag(char c);
 int 	ft_printflag(int fd, const char *format, va_list args);
-int		ft_printhex(int n, char format);
-int		ft_printunsigned(unsigned int n);
-int		ft_printptr(unsigned long long n);
+int		ft_puthex_fd(int n, char format, int fd);
+int		ft_putunsigned_fd(unsigned int n, int fd);
 #endif

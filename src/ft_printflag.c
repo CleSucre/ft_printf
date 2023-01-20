@@ -12,6 +12,13 @@
 
 #include "../includes/libftprintf.h"
 
+int	ft_isflag(char c)
+{
+	return (c == 'c' || c == 's' || c == 'p'
+			|| c == 'd' || c == 'i' || c == 'u'
+			|| c == 'x' || c == 'X' || c == '%');
+}
+
 int ft_printflag(int fd, const char *format, va_list args)
 {
 	int		ret = 0;
@@ -33,11 +40,11 @@ int ft_printflag(int fd, const char *format, va_list args)
 			} else if (format[i] == 'd' || format[i] == 'i') {
 				ret += ft_putnbr_fd(va_arg(args, int), fd);
 			} else if (format[i] == 'u') {
-				ret += ft_printunsigned(va_arg(args, unsigned int));
+				ret += ft_putunsigned_fd(va_arg(args, unsigned int), fd);
 			} else if (format[i] == 'x') {
-				ret += ft_printhex(va_arg(args, unsigned int), format[i]);
+				ret += ft_puthex_fd(va_arg(args, unsigned int), format[i], fd);
 			} else if (format[i] == 'X') {
-				ret += ft_printhex(va_arg(args, unsigned int), format[i]);
+				ret += ft_puthex_fd(va_arg(args, unsigned int), format[i], fd);
 			} else if (format[i] == '%') {
 				ret++;
 				ft_putchar_fd(format[i], fd);
@@ -45,7 +52,7 @@ int ft_printflag(int fd, const char *format, va_list args)
 				ret += 2;
 				ft_putstr_fd("0x", fd);
 			} else if (format[i] == '+') {
-				ret += ft_printnbr(va_arg(args, int));
+				ret += ft_putnbr_fd(va_arg(args, int), fd);
 			}
 		}
 		else {

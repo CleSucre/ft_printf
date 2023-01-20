@@ -1,41 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printhex.c                                      :+:      :+:    :+:   */
+/*   ft_printunsigned.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jthomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 01:18:15 by jthomas           #+#    #+#             */
-/*   Updated: 2022/12/08 02:39:51 by jthomas          ###   ########.fr       */
+/*   Created: 2022/12/08 02:09:50 by jthomas           #+#    #+#             */
+/*   Updated: 2022/12/08 02:29:22 by jthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libftprintf.h"
 
-int	ft_printhex(int n, char format)
+char	*ft_uitoa(unsigned int n)
 {
-	int	res;
+	char	*res;
+	int		i;
 
-	if (!n)
-		return (write(1, "0", 1));
-	res = 1;
-	if (n >= 16)
+	i = ft_nbrlen(n);
+	res = (char *)malloc(sizeof(char) * (i + 1));
+	if (!res)
+		return (0);
+	res[i] = '\0';
+	while (i)
 	{
-		res += ft_printhex(n / 16, format);
-		res += ft_printhex(n % 16, format);
-		res--;
+		res[i - 1] = n % 10 + 48;
+		n = n / 10;
+		i--;
 	}
+	return (res);
+}
+
+int	ft_putunsigned_fd(unsigned int n, int fd)
+{
+	int		res;
+	char	*temp;
+
+	res = 0;
+	if (n == 0)
+		res += write(fd, "0", 1);
 	else
 	{
-		if (n <= 9)
-			ft_putchar_fd((n + '0'), 1);
-		else
-		{
-			if (format == 'x')
-				ft_putchar_fd((n - 10 + 'a'), 1);
-			if (format == 'X')
-				ft_putchar_fd((n - 10 + 'A'), 1);
-		}
+		temp = ft_uitoa(n);
+		res += ft_putstr_fd(temp, fd);
+		free(temp);
 	}
 	return (res);
 }

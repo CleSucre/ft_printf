@@ -24,17 +24,10 @@ NAME = libftprintf.a
 
 SRC_DIR = src
 
-SRCS = ${SRC_DIR}${DIRSEP}ft_isflag.c \
-       ${SRC_DIR}${DIRSEP}ft_isflag.o \
-       ${SRC_DIR}${DIRSEP}ft_printchar.c \
-       ${SRC_DIR}${DIRSEP}ft_printf.c \
-       ${SRC_DIR}${DIRSEP}ft_printf.o \
+SRCS = ${SRC_DIR}${DIRSEP}ft_printf.c \
        ${SRC_DIR}${DIRSEP}ft_printflag.c \
-       ${SRC_DIR}${DIRSEP}ft_printhex.c \
-       ${SRC_DIR}${DIRSEP}ft_printnbr.c \
-       ${SRC_DIR}${DIRSEP}ft_printptr.c \
-       ${SRC_DIR}${DIRSEP}ft_printstr.c \
-       ${SRC_DIR}${DIRSEP}ft_printunsigned.c \
+       ${SRC_DIR}${DIRSEP}ft_puthex_fd.c \
+       ${SRC_DIR}${DIRSEP}ft_putunsigned_fd.c \
 
 OBJS 	= $(SRCS:.c=.o)
 
