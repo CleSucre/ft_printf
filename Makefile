@@ -18,39 +18,47 @@ else
 	RM		= rm -f
 endif
 
-NAME		= libftprintf.a
+NAME = libftprintf.a
 
-SRCS		= src${DIRSEP}ft_printf.c src${DIRSEP}ft_isflag.c src${DIRSEP}ft_printflag.c \
-			  src${DIRSEP}ft_printchar.c src${DIRSEP}ft_printstr.c src${DIRSEP}ft_printnbr.c \
-			  src${DIRSEP}ft_printhex.c src${DIRSEP}ft_printunsigned.c src${DIRSEP}ft_printptr.c
+SRC_DIR = src
 
-OBJS		= ${SRCS:.c=.o}
+SRCS = ${SRC_DIR}${DIRSEP}ft_isflag.c \
+       ${SRC_DIR}${DIRSEP}ft_isflag.o \
+       ${SRC_DIR}${DIRSEP}ft_printchar.c \
+       ${SRC_DIR}${DIRSEP}ft_printf.c \
+       ${SRC_DIR}${DIRSEP}ft_printf.o \
+       ${SRC_DIR}${DIRSEP}ft_printflag.c \
+       ${SRC_DIR}${DIRSEP}ft_printhex.c \
+       ${SRC_DIR}${DIRSEP}ft_printnbr.c \
+       ${SRC_DIR}${DIRSEP}ft_printptr.c \
+       ${SRC_DIR}${DIRSEP}ft_printstr.c \
+       ${SRC_DIR}${DIRSEP}ft_printunsigned.c \
 
-CC			= gcc
+OBJS 	= $(SRCS:.c=.o)
 
-HEAD		= includes
+CC		= gcc
 
-CFLAGS		= -c -Wall -Wextra -Werror -I ${HEAD}
+CFLAGS 	= -Wall -Wextra -Werror
 
-LIBFT 		= ar -crs ${NAME} ${OBJS} libft/src/*.o
+all: $(NAME)
 
-${NAME}: libft.a ${OBJS}
-	${LIBFT}
+libft:
+	make -C libft
 
-libft.a:
-	${MAKE} -C .${DIRSEP}libft all
+$(NAME): libft $(OBJS)
+	ar rcs ${NAME} ${OBJS} libft/libft.a
 
-all: ${NAME}
+%.o: %.c
+	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
-	${RM} ${OBJS}
-	${MAKE} -C .${DIRSEP}libft clean
+	make -C libft clean
+	${RM} -f ${OBJS}
 
-fclean:
-	${RM} ${OBJS}
-	${RM} ${NAME}
-	${MAKE} -C .${DIRSEP}libft fclean
+fclean: clean
+	make -C libft fclean
+	${RM} -f ${NAME}
 
 re: fclean all
 
-.PHONY: all clean fclean re libft.a
+.PHONY: libft all clean fclean re
