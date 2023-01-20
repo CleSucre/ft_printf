@@ -12,22 +12,47 @@
 
 #include "../includes/libftprintf.h"
 
-//shoud alaways be called after ft_isflag
-int ft_printflag(const char *format, va_list args)
+int ft_printflag(int fd, const char *format, va_list args)
 {
-	if (c == 'c')
-		ft_putchar_fd(va_arg(args, int), 1);
-	else if (c == 's')
-		return (ft_printstr(va_arg(args, char *)));
-	else if (c == 'p')
-		return (ft_printptr(va_arg(args, unsigned long long)));
-	else if (c == 'd' || c == 'i')
-		return (ft_printnbr(va_arg(args, int)));
-	else if (c == 'u')
-		return (ft_printunsigned(va_arg(args, int)));
-	else if (c == 'x' || c == 'X')
-		return (ft_printhex(va_arg(args, unsigned int), c));
-	else if (c == '%')
-		ft_putchar_fd(c, 1);
-	return (1);
+	int		ret = 0;
+	char	*temp;
+
+	for (int i = 0; format[i]; i++)
+	{
+		if (format[i] == '%') {
+			i++;
+			if (format[i] == 'c') {
+				ret++;
+				ft_putchar_fd(va_arg(args, int), fd);
+			} else if (format[i] == 's') {
+				temp = va_arg(args, char *);
+				ret += ft_strlen(temp);
+				ft_putstr_fd(temp, fd);
+			} else if (format[i] == 'p') {
+				ret += ft_putnbr_base_fd(va_arg(args, unsigned long), "0123456789ABCDEF", fd);
+			} else if (format[i] == 'd' || format[i] == 'i') {
+				ret += ft_putnbr_fd(va_arg(args, int), fd);
+			} else if (format[i] == 'u') {
+				ret += ft_printunsigned(va_arg(args, unsigned int));
+			} else if (format[i] == 'x') {
+				ret += ft_printhex(va_arg(args, unsigned int), format[i]);
+			} else if (format[i] == 'X') {
+				ret += ft_printhex(va_arg(args, unsigned int), format[i]);
+			} else if (format[i] == '%') {
+				ret++;
+				ft_putchar_fd(format[i], fd);
+			} else if (format[i] == '#') {
+				ret += 2;
+				ft_putstr_fd("0x", fd);
+			} else if (format[i] == '+') {
+				ret += ft_printnbr(va_arg(args, int));
+			}
+		}
+		else {
+			ret++;
+			ft_putchar_fd(format[i], fd);
+		}
+	}
+
+	return ret;
 }

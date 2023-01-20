@@ -18,7 +18,7 @@ int ft_printf(const char *format, ...)
 	int ret;
 
 	va_start(args, format);
-	ret = ft_printflag(format, args);
+	ret = ft_printflag(1, format, args);
 	va_end(args);
 
 	return ret;
