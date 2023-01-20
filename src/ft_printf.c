@@ -12,29 +12,17 @@
 
 #include "../includes/libftprintf.h"
 
-int	ft_printf(const char *format, ...)
-{
-	int		i;
-	int		count;
-	va_list	args;
+#include <stdio.h>
+#include <stdarg.h>
 
-	if (!format)
-		return (0);
-	i = 0;
-	count = 0;
+int ft_printf(const char *format, ...)
+{
+	va_list args;
+	int ret;
+
 	va_start(args, format);
-	while (format[i])
-	{
-		if (format[i] != '%')
-		{
-			ft_putchar_fd(format[i++], 1);
-			count++;
-		}
-		else if (ft_isflag(format[++i]))
-		{
-			count += ft_printflag(format[i++], args);
-		}
-	}
+	ret = ft_printflag(format, args);
 	va_end(args);
-	return (count);
+
+	return ret;
 }

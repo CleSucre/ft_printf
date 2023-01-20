@@ -13,7 +13,7 @@
 #include "../includes/libftprintf.h"
 
 //shoud alaways be called after ft_isflag
-int	ft_printflag(char c, va_list args)
+int ft_printflag(const char *format, va_list args)
 {
 	if (c == 'c')
 		ft_putchar_fd(va_arg(args, int), 1);
