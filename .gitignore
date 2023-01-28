@@ -44,7 +44,6 @@
 
 # Kernel Module Compile Results
 *.mod*
-*.cmd
 .tmp_versions/
 modules.order
 Module.symvers
@@ -55,5 +54,5 @@ dkms.conf
 .idea/
 
 # Test files
-test.c
-win-test.cmd
+#test.c
+#win-test.cmd
