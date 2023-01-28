@@ -40,7 +40,7 @@ all: $(NAME)
 libft.a:
 	make -C .${DIRSEP}libft
 
-$(NAME): libft.a $(OBJS)
+$(NAME): libftprintf.a $(OBJS)
 	${MOVE} libft${DIRSEP}libft.a ${NAME}
 	ar rcs ${NAME} ${OBJS}
 
