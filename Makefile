@@ -6,7 +6,7 @@
 #    By: jthomas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:21:01 by jthomas           #+#    #+#              #
-#    Updated: 2022/12/08 02:42:19 by jthomas          ###   ########.fr        #
+#    Updated: 2023/01/28 14:35:46 by jthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ all: $(NAME)
 libft.a:
 	make -C .${DIRSEP}libft
 
-$(NAME): libftprintf.a $(OBJS)
+$(NAME): libft.a $(OBJS)
 	${MOVE} libft${DIRSEP}libft.a ${NAME}
 	ar rcs ${NAME} ${OBJS}
 
