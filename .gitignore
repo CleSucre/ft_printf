@@ -52,7 +52,7 @@ dkms.conf
 
 # Jetbrain
 .idea/
-
+cmake-build-debug/
 # Test files
 #test.c
 #win-test.cmd
