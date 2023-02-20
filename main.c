@@ -17,7 +17,7 @@ int main(void)
 
 	int ret1, ret2;
 
-	ft_putstr_fd("=========================TESTS START HERE=========================\n", 1);
+	//ft_putstr_fd("=========================TESTS START HERE=========================\n", 1);
 
 	ret1 = 0;
 	//ret1 = ft_printf("%c\n", c);

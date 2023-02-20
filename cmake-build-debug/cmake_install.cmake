@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Julie/OneDrive/Documents/projects/42/debug
+# Install script for directory: C:/Users/Julie/OneDrive/Documents/projects/42/ft_printf
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/debug")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/ft_printf")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Julie/OneDrive/Documents/projects/42/debug/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/Julie/OneDrive/Documents/projects/42/ft_printf/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
-project(debug)
+project(ft_printf C)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_C_STANDARD 11)
 
-add_executable(debug test.c)
+add_executable(ft_printf main.c)
