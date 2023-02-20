@@ -23,7 +23,6 @@ int	ft_printflag(int fd, const char *format, va_list args)
 {
 	int		ret;
 	int		i;
-	char	*temp;
 
 	ret = 0;
 	i = 0;
@@ -33,45 +32,16 @@ int	ft_printflag(int fd, const char *format, va_list args)
 		{
 			i++;
 			if (format[i] == 'c')
-			{
-				ret++;
-				ft_putchar_fd(va_arg(args, int), fd);
-			}
+				ret += ft_putchar_fd(va_arg(args, int), fd);
 			else if (format[i] == 's')
-			{
-				temp = va_arg(args, char *);
-				ret += ft_strlen(temp);
-				ft_putstr_fd(temp, fd);
-			}
-			else if (format[i] == 'p')
-				ret += ft_putnbr_base_fd(
-						va_arg(args, unsigned long), "0123456789ABCDEF", fd);
-			else if (format[i] == 'd' || format[i] == 'i')
+				ret += ft_putstr_fd(va_arg(args, char *), fd);
+			else if (format[i] == 'p' || format[i] == 'd' || format[i] == 'i' || format[i] == 'u' || format[i] == 'x' || format[i] == 'X')
 				ret += ft_putnbr_fd(va_arg(args, int), fd);
-			else if (format[i] == 'u')
-				ret += ft_putunsigned_fd(va_arg(args, unsigned int), fd);
-			else if (format[i] == 'x')
-				ret += ft_puthex_fd(va_arg(args, unsigned int), format[i], fd);
-			else if (format[i] == 'X')
-				ret += ft_puthex_fd(va_arg(args, unsigned int), format[i], fd);
-			else if (format[i] == '%')
-			{
-				ret++;
-				ft_putchar_fd(format[i], fd);
-			}
-			else if (format[i] == '#')
-			{
-				ret += 2;
-				ft_putstr_fd("0x", fd);
-			}
-			else if (format[i] == '+')
-				ret += ft_putnbr_fd(va_arg(args, int), fd);
+			else if (format[i] == '%' || format[i] == '#')
+				ret += ft_putchar_fd(format[i], fd);
 		}
 		else
-		{
-			ret++;
-			ft_putchar_fd(format[i], fd);
-		}
+			ret += ft_putchar_fd(format[i], fd);
 		i++;
 	}
 	return (ret);
