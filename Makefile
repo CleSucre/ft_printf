@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jthomas <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: jthomas <jthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:21:01 by jthomas           #+#    #+#              #
-#    Updated: 2023/01/28 14:35:46 by jthomas          ###   ########.fr        #
+#    Updated: 2023/03/01 17:24:47 by jthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,7 @@ SRC_DIR = src
 
 SRCS = ${SRC_DIR}${DIRSEP}ft_printf.c \
        ${SRC_DIR}${DIRSEP}ft_printflag.c \
-       ${SRC_DIR}${DIRSEP}ft_puthex_fd.c \
-       ${SRC_DIR}${DIRSEP}ft_putunsigned_fd.c \
+       ${SRC_DIR}${DIRSEP}ft_printf_utils.c
 
 OBJS 	= $(SRCS:.c=.o)
 
