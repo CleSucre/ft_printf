@@ -26,7 +26,8 @@ SRC_DIR = src
 
 SRCS = ${SRC_DIR}${DIRSEP}ft_printf.c \
        ${SRC_DIR}${DIRSEP}ft_printflag.c \
-       ${SRC_DIR}${DIRSEP}ft_printf_utils.c
+       ${SRC_DIR}${DIRSEP}ft_printf_utils.c \
+       ${SRC_DIR}${DIRSEP}libft_utils.c
 
 OBJS 	= $(SRCS:.c=.o)
 
@@ -36,24 +37,18 @@ CFLAGS 	= -Wall -Wextra -Werror
 
 all: $(NAME)
 
-libft.a:
-	make -C .${DIRSEP}libft
-
-$(NAME): libft.a $(OBJS)
-	${MOVE} libft${DIRSEP}libft.a ${NAME}
+$(NAME): $(OBJS)
 	ar rcs ${NAME} ${OBJS}
 
 %.o: %.c
 	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
-	make -C .${DIRSEP}libft clean
 	${RM} ${OBJS}
 
 fclean: clean
-	make -C .${DIRSEP}libft fclean
 	${RM} ${NAME}
 
 re: fclean all
 
-.PHONY: libft all clean fclean re
+.PHONY: all clean fclean re

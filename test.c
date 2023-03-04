@@ -21,7 +21,6 @@ int	main(void)
 
 	p = (void *)0x7fff5fbffb90;
 	ft_putstr_fd("===============TESTS START HERE===============\n", 1);
-	ret1 = 0;
 	ret1 = ft_printf("%p\n", p);
 	ret2 = printf("%p\n", p);
 	printf("ft_printf: %d, printf: %d\n", ret1, ret2);
