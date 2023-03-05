@@ -1,3 +1,4 @@
+@echo off
 make
-gcc test.c libftprintf.a
+for %%f in (test\*) do gcc -Wall -Wextra -Werror %%f libftprintf.a
 a.exe

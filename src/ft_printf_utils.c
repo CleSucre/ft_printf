@@ -12,7 +12,7 @@
 
 #include "../includes/libftprintf.h"
 
-int	ft_putunsignedhex_fd(unsigned long n, int fd)
+int	ft_putunsignedhex_fd(unsigned long n, int fd, int *error)
 {
 	int	res;
 
@@ -21,21 +21,21 @@ int	ft_putunsignedhex_fd(unsigned long n, int fd)
 	res = 1;
 	if (n >= 16)
 	{
-		res += ft_putunsignedhex_fd(n / 16, fd);
-		res += ft_putunsignedhex_fd(n % 16, fd);
+		res += ft_putunsignedhex_fd(n / 16, fd, error);
+		res += ft_putunsignedhex_fd(n % 16, fd, error);
 		res--;
 	}
 	else
 	{
 		if (n <= 9)
-			ft_putchar_fd((n + '0'), fd);
+			ft_putchar_fd((n + '0'), fd, error);
 		else
-			ft_putchar_fd((n - 10 + 'a'), fd);
+			ft_putchar_fd((n - 10 + 'a'), fd, error);
 	}
 	return (res);
 }
 
-int	ft_puthex_fd(unsigned int n, char format, int fd)
+int	ft_puthex_fd(unsigned int n, char format, int fd, int *error)
 {
 	int	res;
 
@@ -44,20 +44,20 @@ int	ft_puthex_fd(unsigned int n, char format, int fd)
 	res = 1;
 	if (n >= 16)
 	{
-		res += ft_puthex_fd(n / 16, format, fd);
-		res += ft_puthex_fd(n % 16, format, fd);
+		res += ft_puthex_fd(n / 16, format, fd, error);
+		res += ft_puthex_fd(n % 16, format, fd, error);
 		res--;
 	}
 	else
 	{
 		if (n <= 9)
-			ft_putchar_fd((n + '0'), fd);
+			ft_putchar_fd((n + '0'), fd, error);
 		else
 		{
 			if (format == 'x')
-				ft_putchar_fd((n - 10 + 'a'), fd);
+				ft_putchar_fd((n - 10 + 'a'), fd, error);
 			if (format == 'X')
-				ft_putchar_fd((n - 10 + 'A'), fd);
+				ft_putchar_fd((n - 10 + 'A'), fd, error);
 		}
 	}
 	return (res);
@@ -82,7 +82,7 @@ char	*ft_uitoa(unsigned int n)
 	return (res);
 }
 
-int	ft_putunsigned_fd(unsigned int n, int fd)
+int	ft_putunsigned_fd(unsigned int n, int fd, int *error)
 {
 	int		res;
 	char	*temp;
@@ -93,16 +93,8 @@ int	ft_putunsigned_fd(unsigned int n, int fd)
 	else
 	{
 		temp = ft_uitoa(n);
-		res += ft_putstr_fd(temp, fd);
+		res += ft_putstr_fd(temp, fd, error);
 		free(temp);
 	}
 	return (res);
-}
-
-int	ft_printptr_fd(unsigned long long s, int fd)
-{
-	int	i;
-
-	i = 0;
-	return (i + fd + s);
 }

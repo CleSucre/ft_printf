@@ -24,14 +24,12 @@ typedef struct s_list
 }	t_list;
 
 int		ft_printf(const char *format, ...);
-int		ft_printflag(int fd, const char *format, va_list args);
-int		ft_puthex_fd(unsigned int n, char format, int fd);
-int		ft_putunsigned_fd(unsigned int n, int fd);
-int		ft_printptr_fd(unsigned long long s, int fd);
-int		ft_putunsignedhex_fd(unsigned long n, int fd);
-
-int		ft_putchar_fd(char c, int fd);
-int		ft_putstr_fd(char *s, int fd);
-int		ft_putnbr_fd(int n, int fd);
+int		ft_printflag(int fd, const char *format, va_list args, int *error);
+int		ft_puthex_fd(unsigned int n, char format, int fd, int *error);
+int		ft_putunsigned_fd(unsigned int n, int fd, int *error);
+int		ft_putunsignedhex_fd(unsigned long n, int fd, int *error);
+int		ft_putchar_fd(char c, int fd, int *error);
+int		ft_putstr_fd(char *s, int fd, int *error);
+int		ft_putnbr_fd(int n, int fd, int *error);
 size_t	ft_nbrlen(long n);
 #endif

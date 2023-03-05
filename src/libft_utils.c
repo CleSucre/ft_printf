@@ -1,11 +1,18 @@
 #include "../includes/libftprintf.h"
 
-int	ft_putchar_fd(char c, int fd)
+int	ft_putchar_fd(char c, int fd, int *error)
 {
-	return (write(fd, &c, 1));
+	int res;
+
+	if (*error == -1)
+		return (-1);
+	res = write(fd, &c, 1);
+	if (res < 0)
+		*error = -1;
+	return (res);
 }
 
-int	ft_putstr_fd(char *s, int fd)
+int	ft_putstr_fd(char *s, int fd, int *error)
 {
 	int	i;
 
@@ -13,11 +20,11 @@ int	ft_putstr_fd(char *s, int fd)
 		return (-1);
 	i = 0;
 	while (*s)
-		i += write(fd, &*s++, 1);
+		i += ft_putchar_fd(*s++, fd, error);
 	return (i);
 }
 
-int	ft_putnbr_fd(int n, int fd)
+int	ft_putnbr_fd(int n, int fd, int *error)
 {
 	long	i;
 	int		temp;
@@ -26,19 +33,19 @@ int	ft_putnbr_fd(int n, int fd)
 	temp = 0;
 	if (i < 0)
 	{
-		ft_putchar_fd('-', fd);
+		ft_putchar_fd('-', fd, error);
 		i *= -1;
 		temp++;
 	}
 	if (i < 10)
 	{
-		ft_putchar_fd(i + '0', fd);
+		ft_putchar_fd(i + '0', fd, error);
 		temp++;
 	}
 	else
 	{
-		temp += ft_putnbr_fd(i / 10, fd);
-		temp += ft_putnbr_fd(i % 10, fd);
+		temp += ft_putnbr_fd(i / 10, fd, error);
+		temp += ft_putnbr_fd(i % 10, fd, error);
 	}
 	return (temp);
 }

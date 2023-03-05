@@ -16,9 +16,13 @@ int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		ret;
+	int 	error;
 
+	error = 0;
 	va_start(args, format);
-	ret = ft_printflag(1, format, args);
+	ret = ft_printflag(1, format, args, &error);
 	va_end(args);
+	if (error == -1)
+		return (-1);
 	return (ret);
 }
