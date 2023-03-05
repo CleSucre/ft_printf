@@ -6,7 +6,7 @@
 /*   By: jthomas <jthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 23:46:38 by jthomas           #+#    #+#             */
-/*   Updated: 2023/03/01 18:30:06 by jthomas          ###   ########.fr       */
+/*   Updated: 2023/03/05 15:51:19 by jthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		ret;
-	int 	error;
+	int		error;
 
 	error = 0;
 	va_start(args, format);

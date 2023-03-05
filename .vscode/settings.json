@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "libftprintf.h": "c",
+        "__locale": "c"
+    }
+}

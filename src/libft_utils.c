@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jthomas <jthomas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/05 15:52:00 by jthomas           #+#    #+#             */
+/*   Updated: 2023/03/05 15:54:25 by jthomas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/libftprintf.h"
 
 int	ft_putchar_fd(char c, int fd, int *error)
 {
-	int res;
+	int	res;
 
 	if (*error == -1)
 		return (-1);
@@ -17,7 +29,7 @@ int	ft_putstr_fd(char *s, int fd, int *error)
 	int	i;
 
 	if (!s)
-		return (-1);
+		return (ft_putstr_fd("(null)", fd, error));
 	i = 0;
 	while (*s)
 		i += ft_putchar_fd(*s++, fd, error);

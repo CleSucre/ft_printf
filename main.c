@@ -6,14 +6,14 @@
 /*   By: jthomas <jthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 18:12:16 by jthomas           #+#    #+#             */
-/*   Updated: 2023/03/01 18:14:58 by jthomas          ###   ########.fr       */
+/*   Updated: 2023/03/05 16:44:57 by jthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libftprintf.h"
 
-int main(void) {
-
-	ft_printf("Hello World! My age is %d", 17);
+int	main(void)
+{
+	ft_printf("Test: %u", -200000);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jthomas <jthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:25:42 by jthomas           #+#    #+#             */
-/*   Updated: 2023/03/01 18:16:11 by jthomas          ###   ########.fr       */
+/*   Updated: 2023/03/05 16:52:58 by jthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_putunsignedhex_fd(unsigned long n, int fd, int *error)
 	int	res;
 
 	if (!n)
-		return (write(fd, "0", 1));
+		return (ft_putchar_fd('0', fd, error));
 	res = 1;
 	if (n >= 16)
 	{
@@ -40,7 +40,7 @@ int	ft_puthex_fd(unsigned int n, char format, int fd, int *error)
 	int	res;
 
 	if (!n)
-		return (write(fd, "0", 1));
+		return (ft_putchar_fd('0', fd, error));
 	res = 1;
 	if (n >= 16)
 	{
@@ -63,7 +63,7 @@ int	ft_puthex_fd(unsigned int n, char format, int fd, int *error)
 	return (res);
 }
 
-char	*ft_uitoa(unsigned int n)
+char	*ft_uitoa(long long int n, int *error)
 {
 	char	*res;
 	int		i;
@@ -71,7 +71,10 @@ char	*ft_uitoa(unsigned int n)
 	i = ft_nbrlen(n);
 	res = (char *)malloc(sizeof(char) * (i + 1));
 	if (!res)
+	{
+		*error = -1;
 		return (0);
+	}
 	res[i] = '\0';
 	while (i)
 	{
@@ -82,17 +85,19 @@ char	*ft_uitoa(unsigned int n)
 	return (res);
 }
 
-int	ft_putunsigned_fd(unsigned int n, int fd, int *error)
+int	ft_putunsigned_fd(long long int n, int fd, int *error)
 {
-	int		res;
-	char	*temp;
+	int				res;
+	char			*temp;
+	unsigned int	num;
 
+	num = (unsigned int)n;
 	res = 0;
-	if (n == 0)
-		res += write(fd, "0", 1);
+	if (num == 0)
+		res += ft_putchar_fd('0', fd, error);
 	else
 	{
-		temp = ft_uitoa(n);
+		temp = ft_uitoa(num, error);
 		res += ft_putstr_fd(temp, fd, error);
 		free(temp);
 	}
