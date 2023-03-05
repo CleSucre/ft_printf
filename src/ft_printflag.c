@@ -6,7 +6,7 @@
 /*   By: jthomas <jthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 23:46:52 by jthomas           #+#    #+#             */
-/*   Updated: 2023/03/05 16:49:46 by jthomas          ###   ########.fr       */
+/*   Updated: 2023/03/05 16:55:42 by jthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_print(int fd, const char format, va_list args, int *error)
 		return (ft_putunsigned_fd(va_arg(args, long long int), fd, error));
 	if (format == 'x' || format == 'X')
 		return (ft_puthex_fd(va_arg(args, int), format, fd, error));
-	if (format == '%' || format == '#')
+	if (format == '%')
 		return (ft_putchar_fd(format, fd, error));
 	if (format == 'p')
 	{
