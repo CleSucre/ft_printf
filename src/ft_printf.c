@@ -46,6 +46,8 @@ int	ft_printf(const char *format, ...)
 	int		res;
 	int		fd;
 
+	if (!format)
+		return (-1);
 	res = 0;
 	fd = 1;
 	va_start(param, format);
@@ -59,6 +61,11 @@ int	ft_printf(const char *format, ...)
 		else
 			res += ft_putchar_fd(*format, fd);
 		format++;
+		if (res < 0)
+		{
+			va_end(param);
+			return (-1);
+		}
 	}
 	va_end(param);
 	return (res);

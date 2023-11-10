@@ -25,13 +25,13 @@ NAME		= libftprintf.a
 NAME_UNIT	= unit_test.out
 
 SRCS		= ft_printf.c \
-				print${DIRSEP}ft_putchar_fd.c \
-				print${DIRSEP}ft_putstr_fd.c \
-				print${DIRSEP}ft_putpointer_fd.c \
-				print${DIRSEP}ft_putnbr_fd.c \
-				print${DIRSEP}ft_putnbr_unsigned_fd.c \
-				print${DIRSEP}ft_putnbr_base_fd.c \
-				utils${DIRSEP}ft_strlen.c
+				ft_putchar_fd.c \
+				ft_putstr_fd.c \
+				ft_putpointer_fd.c \
+				ft_putnbr_fd.c \
+				ft_putnbr_unsigned_fd.c \
+				ft_putnbr_base_fd.c \
+				ft_strlen.c
 
 SRCS_UNIT	= unit_test.c
 
@@ -39,7 +39,7 @@ OBJS		= $(addprefix src${DIRSEP}, ${SRCS:%.c=%.o})
 
 OBJS_UNIT	= $(addprefix unitests${DIRSEP}, ${SRCS_UNIT:%.c=%.o})
 
-CC			= gcc
+CC			= cc
 
 HEAD		= includes
 
@@ -64,7 +64,7 @@ fclean: clean
 re: fclean all
 
 unitest: all ${OBJS_UNIT}
-	${CC} ${CFLAGS} -o ${NAME_UNIT} ${OBJS_UNIT} ${NAME}
+	${CC} -o ${NAME_UNIT} ${OBJS_UNIT} ${NAME}
 	./${NAME_UNIT}
 
 .PHONY: all clean fclean re unitest

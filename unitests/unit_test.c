@@ -11,9 +11,11 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 void	run_tests(void)
 {
+	printf("test 1: %d\n", ft_printf("Salut %s\n", "Julien"));
 }
 
 int	main(void)

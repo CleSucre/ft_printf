@@ -14,7 +14,12 @@
 
 int	ft_putstr_fd(const char *str, int fd)
 {
+	int	res;
+
 	if (str == NULL)
 		str = "(null)";
-	return (write(fd, str, ft_strlen(str)));
+	res = 0;
+	while (*str)
+		res += ft_putchar_fd(*str++, fd);
+	return (res);
 }
