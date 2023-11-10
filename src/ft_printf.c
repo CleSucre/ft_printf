@@ -28,9 +28,11 @@ int	ft_print_param(va_list ap, const char param, int fd)
 	else if (param == 'u')
 		res += ft_putnbr_unsigned_fd(va_arg(ap, unsigned int), fd);
 	else if (param == 'x')
-		res += ft_putnbr_base_fd(va_arg(ap, unsigned int), "0123456789abcdef", fd);
+		res += ft_putnbr_base_fd(
+				va_arg(ap, unsigned int), "0123456789abcdef", fd);
 	else if (param == 'X')
-		res += ft_putnbr_base_fd(va_arg(ap, unsigned int), "0123456789ABCDEF", fd);
+		res += ft_putnbr_base_fd(
+				va_arg(ap, unsigned int), "0123456789ABCDEF", fd);
 	else if (param == '%')
 		res += ft_putchar_fd('%', fd);
 	else

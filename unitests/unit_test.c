@@ -11,17 +11,13 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+
+void	run_tests(void)
+{
+}
 
 int	main(void)
 {
-	int	res1;
-	int	res2;
-	int	n;
-
-	n = -1536;
-	res1 = ft_printf("integer: %u\n", n);
-	res2 = printf("integer: %u\n", n);
-	ft_printf("res1: %d\nres2: %d\n", res1, res2);
+	run_tests();
 	return (0);
 }
