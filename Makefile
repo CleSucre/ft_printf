@@ -22,7 +22,7 @@ endif
 
 NAME		= libftprintf.a
 
-NAME_UNIT	= unit_test
+NAME_UNIT	= unit_test.out
 
 SRCS		= ft_printf.c \
 				print${DIRSEP}ft_putchar_fd.c \
