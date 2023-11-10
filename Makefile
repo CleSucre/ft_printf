@@ -59,6 +59,7 @@ clean:
 
 fclean: clean
 	${RM} ${NAME}
+	${RM} ${NAME_UNIT}
 
 re: fclean all
 
