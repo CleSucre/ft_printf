@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthomas <jthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: julthoma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 18:12:16 by jthomas           #+#    #+#             */
-/*   Updated: 2023/03/05 16:44:57 by jthomas          ###   ########.fr       */
+/*   Created: 2023/11/10 18:19:12 by julthoma          #+#    #+#             */
+/*   Updated: 2023/11/10 18:19:12 by julthoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libftprintf.h"
+#include "ft_printf.h"
 
-int	main(void)
+int	ft_putchar_fd(char c, int fd)
 {
-	ft_printf("Test: %u", -200000);
-	return (0);
+	return (write(fd, &c, 1));
 }

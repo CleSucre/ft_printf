@@ -3,52 +3,67 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jthomas <jthomas@student.42.fr>            +#+  +:+       +#+         #
+#    By: julthoma <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/02 15:21:01 by jthomas           #+#    #+#              #
-#    Updated: 2023/03/01 17:24:47 by jthomas          ###   ########.fr        #
+#    Created: 2023/11/02 17:07:47 by julthoma          #+#    #+#              #
+#    Updated: 2023/11/02 17:07:47 by julthoma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ifeq ($(OS), Windows_NT)
 	DIRSEP	= \\
+	CP		= copy
 	RM		= del -f
-	MOVE	= move
 else
 	DIRSEP	= /
+	CP		= cp
 	RM		= rm -f
-	MOVE	= mv
 endif
 
-NAME = libftprintf.a
+NAME		= libftprintf.a
 
-SRC_DIR = src
+NAME_UNIT	= unit_test
 
-SRCS = ${SRC_DIR}${DIRSEP}ft_printf.c \
-       ${SRC_DIR}${DIRSEP}ft_printflag.c \
-       ${SRC_DIR}${DIRSEP}ft_printf_utils.c \
-       ${SRC_DIR}${DIRSEP}libft_utils.c
+SRCS		= ft_printf.c \
+				print${DIRSEP}ft_putchar_fd.c \
+				print${DIRSEP}ft_putstr_fd.c \
+				print${DIRSEP}ft_putpointer_fd.c \
+				print${DIRSEP}ft_putnbr_fd.c \
+				print${DIRSEP}ft_putnbr_unsigned_fd.c \
+				print${DIRSEP}ft_putnbr_base_fd.c \
+				utils${DIRSEP}ft_strlen.c
 
-OBJS 	= $(SRCS:.c=.o)
+SRCS_UNIT	= unit_test.c
 
-CC		= gcc
+OBJS		= $(addprefix src${DIRSEP}, ${SRCS:%.c=%.o})
 
-CFLAGS 	= -Wall -Wextra -Werror
+OBJS_UNIT	= $(addprefix unitests${DIRSEP}, ${SRCS_UNIT:%.c=%.o})
 
-all: $(NAME)
+CC			= gcc
 
-$(NAME): $(OBJS)
-	ar rcs ${NAME} ${OBJS}
+HEAD		= includes
 
-%.o: %.c
-	${CC} ${CFLAGS} -c $< -o $@
+CFLAGS		= -Wall -Wextra -Werror -I ${HEAD}
 
-clean:
+%.o : %.c
+	${CC} ${CFLAGS} -o $@ -c $<
+
+${NAME}: ${OBJS} ${HEAD}
+	ar crs ${NAME} ${OBJS}
+
+all: ${NAME}
+
+clean: 
 	${RM} ${OBJS}
+	${RM} ${OBJS_UNIT}
 
 fclean: clean
 	${RM} ${NAME}
 
 re: fclean all
 
-.PHONY: all clean fclean re
+unitest: all ${OBJS_UNIT}
+	${CC} ${CFLAGS} -o ${NAME_UNIT} ${OBJS_UNIT} ${NAME}
+	./${NAME_UNIT}
+
+.PHONY: all clean fclean re unitest
